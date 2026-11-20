@@ -1,0 +1,350 @@
+{
+  "machine": {
+    "model": "CM-700MM",
+    "nameZh": "CM-700MM 多辊干法制膜设备",
+    "nameEn": "CM-700MM Multi-Roll Dry-Electrode Calendering Line",
+    "filmWidthMm": 700,
+    "rollBarrelHalfZ": 0.44,
+    "webHalfZ": 0.35,
+    "nipGap": 0.008,
+    "defaultLineSpeed": 24.0,
+    "defaultThicknessUm": 120,
+    "defaultTempC": 135,
+    "defaultForceKn": 860,
+    "fontPath": "/System/Library/Fonts/Supplemental/DIN Alternate Bold.ttf"
+  },
+  "calenderStack": {
+    "r4Center": [-0.02, 1.56],
+    "radii": {
+      "R1": 0.088,
+      "R2": 0.145,
+      "R3": 0.168,
+      "R4": 0.265,
+      "R5": 0.265
+    },
+    "anglesDeg": {
+      "r34": 158.0,
+      "r23": -138.0,
+      "r12": -175.0
+    },
+    "bolts": 4
+  },
+  "guideRolls": [
+    { "name": "Guide_G01_Takeoff",  "x": 0.33, "y": 1.38, "r": 0.068, "spin": -1, "partId": "guide_rollers" },
+    { "name": "Guide_G02_Peel",     "x": 0.31, "y": 1.04, "r": 0.056, "spin":  1, "partId": "guide_rollers" },
+    { "name": "Guide_G03_Drop",     "x": 0.56, "y": 0.94, "r": 0.056, "spin": -1, "partId": "guide_rollers" },
+    { "name": "Guide_G04_LowerA",   "x": 0.65, "y": 0.77, "r": 0.058, "spin":  1, "partId": "guide_rollers" },
+    { "name": "Guide_G05_LowerB",   "x": 0.83, "y": 0.66, "r": 0.058, "spin":  1, "partId": "guide_rollers" },
+    { "name": "Guide_G06_GaugeIn",  "x": 1.09, "y": 0.85, "r": 0.062, "spin": -1, "partId": "guide_rollers" },
+    { "name": "Guide_G07_GaugeOut", "x": 1.35, "y": 0.85, "r": 0.062, "spin": -1, "partId": "guide_rollers" },
+    { "name": "Guide_G08_Dancer",   "x": 1.48, "y": 0.60, "r": 0.064, "spin":  1, "partId": "guide_rollers" },
+    { "name": "Guide_G09_Bridge",   "x": 1.78, "y": 0.76, "r": 0.066, "spin": -1, "partId": "guide_rollers" },
+    { "name": "Guide_G10_WinderIn", "x": 1.99, "y": 0.48, "r": 0.068, "spin": -1, "partId": "winder_unit" }
+  ],
+  "winderDrum": {
+    "name": "Winder_W1_Drum",
+    "x": 1.90,
+    "y": 0.165,
+    "r": 0.125,
+    "spin": 1,
+    "partId": "winder_unit"
+  },
+  "tieRods": [
+    { "name": "TieRod_Left",  "x": -0.74, "y": 2.18, "r": 0.068 },
+    { "name": "TieRod_Right", "x":  0.22, "y": 2.18, "r": 0.068 }
+  ],
+  "layout": {
+    "cutawayOffsetZ": 2.35,
+    "frontCabinet": { "x": [-1.16, 0.38], "y": [0.0, 2.46], "z": [0.46, 1.34] },
+    "rearCabinet":  { "x": [-1.16, 0.38], "y": [0.0, 2.46], "z": [-1.40, -0.45] },
+    "thermalUnit":  { "x": [1.54, 2.74],  "y": [0.0, 1.18], "z": [-2.80, -1.60] },
+    "electricalCabinet": { "x": [-0.35, 1.32], "y": [0.0, 2.08], "z": [-2.68, -1.68] }
+  },
+  "contactShadow": {
+    "xMin": -4.6,
+    "xMax": 3.8,
+    "zMin": -3.8,
+    "zMax": 2.6,
+    "resolution": 768
+  },
+  "cameraPresets": {
+    "overview": {
+      "label": "整机总览",
+      "pos": [6.20, 2.02, 6.60],
+      "target": [-0.20, 1.24, -0.58],
+      "lensMm": 42.0,
+      "cutaway": 0.0
+    },
+    "cutaway": {
+      "label": "多辊剖视",
+      "pos": [-1.28, 1.50, 4.55],
+      "target": [0.28, 1.12, -0.15],
+      "lensMm": 42.0,
+      "cutaway": 1.0
+    },
+    "rollers": {
+      "label": "五辊特写",
+      "pos": [-0.42, 1.44, 2.85],
+      "target": [0.24, 1.14, -0.08],
+      "lensMm": 48.0,
+      "cutaway": 1.0
+    },
+    "feeder": {
+      "label": "爬梯上料",
+      "pos": [-4.85, 2.25, 3.85],
+      "target": [-1.85, 1.40, 0.20],
+      "lensMm": 40.0,
+      "cutaway": 0.0
+    },
+    "winder": {
+      "label": "收卷电控",
+      "pos": [4.95, 1.75, 2.65],
+      "target": [1.75, 0.85, -0.95],
+      "lensMm": 42.0,
+      "cutaway": 0.0
+    },
+    "rear": {
+      "label": "背面视角",
+      "pos": [-5.65, 3.05, -6.10],
+      "target": [0.05, 1.22, -0.60],
+      "lensMm": 38.0,
+      "cutaway": 0.0
+    }
+  },
+  "parts": [
+    {
+      "id": "calender_rolls",
+      "category": "core",
+      "zh": "五辊精密压延主机",
+      "en": "5-Roll Precision Calendering Stack (R1–R5)",
+      "summary": "核心成膜机构，由 5 根不同直径的镜面硬化合金钢辊与 2 根上部液压拉杆组成，通过逐级挤压剪切将干法粉料压延为致密均匀的 700mm 极片薄膜。",
+      "principle": "干法混合粉料落入 R1（计量喂料辊）与 R2（预压辊）辊缝形成初胚膜，经 R2→R3 中间辊剪切纤维化，再进入大直径 R4/R5 主压辊之间承受高达 1500 kN 线压力精密定厚，两侧步进伺服液压缸实时闭环调控辊缝精度（±1 μm）。",
+      "materials": "冷作锻造高铬合金钢 9Cr2MoV，表面淬火硬度 HRC 62–65，镜面镀硬铬 Ra ≤ 0.02 μm；端盖精密 CNC 车削同心刀纹；内部螺旋油道控温。",
+      "specs": [
+        { "k": "有效辊面宽度", "v": "700 mm" },
+        { "k": "主辊直径 (R4/R5)", "v": "Ø530 mm" },
+        { "k": "辊缝精度", "v": "±1.0 μm" },
+        { "k": "最高工作温度", "v": "180 °C" }
+      ],
+      "explodeVector": [0.0, 0.35, 0.35],
+      "focusPos": [-0.25, 1.48, 0.0],
+      "focusCam": [-0.75, 1.65, 2.75]
+    },
+    {
+      "id": "guide_rollers",
+      "category": "core",
+      "zh": "多级张力与测厚导辊组",
+      "en": "10-Roll S-Wrap Tension & Inspection Path",
+      "summary": "位于主压辊与收卷位之间的 S 型多级导辊群（G1–G9），负责平稳剥离薄膜、消除内应力、提供激光测厚基准面及浮动张力闭环控制。",
+      "principle": "成膜极片自 R4/R5 辊缝脱模后，依次绕过剥离辊 G1/G2、过渡辊 G3–G5 进入水平测厚桥（G6–G7），再通过 G8 气动浮动张力摆辊稳定张力波动，最终经 G9 平顺过渡至收卷区。",
+      "materials": "轻量化航空铝合金辊体（表面阳极硬质氧化 / 防粘特氟龙涂层），配低摩擦精密陶瓷深沟球轴承。",
+      "specs": [
+        { "k": "导辊数量", "v": "9 根 (G1–G9)" },
+        { "k": "张力控制精度", "v": "±0.5 N" },
+        { "k": "动平衡等级", "v": "G2.5" },
+        { "k": "包角布局", "v": "多级 S 型防打滑" }
+      ],
+      "explodeVector": [0.65, -0.10, 0.45],
+      "focusPos": [1.15, 0.80, 0.0],
+      "focusCam": [1.15, 1.15, 2.55]
+    },
+    {
+      "id": "winder_unit",
+      "category": "core",
+      "zh": "精密收卷机构",
+      "en": "Precision Recoiler & Winding Drum (G10 / W1)",
+      "summary": "设备末端的 C 型敞开式收卷工位，包含入卷导辊 G10、气胀收卷轴 W1 及卷径检测机构，实现成品极片整齐齐边收卷。",
+      "principle": "伺服收卷电机按锥度张力曲线随卷径增大实时调整输出转矩，防止膜卷内松外紧或起皱；C 型前开口便于换卷小车快速装卸成品卷。",
+      "materials": "高刚性键条式气胀轴（45# 调质钢镀硬铬），碳纤维或铝合金卷芯套筒。",
+      "specs": [
+        { "k": "最大收卷宽度", "v": "700 mm" },
+        { "k": "收卷张力模式", "v": "闭环锥度控制" },
+        { "k": "齐边精度", "v": "±0.2 mm" },
+        { "k": "换卷结构", "v": "C 型前出料口" }
+      ],
+      "explodeVector": [1.25, -0.15, 0.30],
+      "focusPos": [1.92, 0.32, 0.0],
+      "focusCam": [3.25, 0.90, 1.95]
+    },
+    {
+      "id": "electrode_web",
+      "category": "core",
+      "zh": "700mm 干法极片料带与供粉区",
+      "en": "700mm Dry-Electrode Film Web & Powder Feed Zone",
+      "summary": "展示设备核心工艺流程：顶部蓝色供粉区落下的干法电极混合粉料，经五辊逐级压延转化为连续高密度自支撑极片膜并完成收卷。",
+      "principle": "干法电极（PTFE 纤维化）无需溶剂烘干，直接通过多辊高剪切力将活性物质、导电剂与粘结剂压实成连续自支撑薄膜，显著降低能耗与涂布车间占地。",
+      "materials": "干法电极活性粉体（磷酸铁锂/三元/石墨 + 导电炭黑 + 原纤化 PTFE 粘结剂）。",
+      "specs": [
+        { "k": "极片有效幅宽", "v": "700 mm" },
+        { "k": "目标膜厚范围", "v": "60 – 220 μm" },
+        { "k": "面密度均匀性", "v": "≤ ±1.0%" },
+        { "k": "工艺路线", "v": "无溶剂干法成膜" }
+      ],
+      "explodeVector": [0.0, 0.65, 0.65],
+      "focusPos": [0.55, 1.15, 0.15],
+      "focusCam": [0.20, 1.40, 3.15]
+    },
+    {
+      "id": "powder_hopper",
+      "category": "core",
+      "zh": "不锈钢供料料斗与定量布料台",
+      "en": "Powder Hopper Tower & Precision Dosing Table",
+      "summary": "位于左上方的高位密闭不锈钢锥形粉料仓、深色龙门承重塔架及悬臂式定量布料台，负责向 R1–R2 辊缝均匀稳定供粉。",
+      "principle": "失重式定量给料机配合料斗内部破拱防架桥搅拌器，将粉料按设定克重精度连续铺展至悬臂布料滑台，避免极片横向厚度偏差。",
+      "materials": "SUS316L 电池级镜面抛光不锈钢料仓（防铁磁性异物污染），碳钢静电喷塑龙门支架。",
+      "specs": [
+        { "k": "料斗材质", "v": "SUS316L 镜面抛光" },
+        { "k": "布料均匀度", "v": "≤ ±0.8%" },
+        { "k": "塔架总高", "v": "3180 mm" },
+        { "k": "供料方式", "v": "失重式定量布料" }
+      ],
+      "explodeVector": [-0.95, 0.75, 0.0],
+      "focusPos": [-1.55, 2.20, 0.0],
+      "focusCam": [-3.15, 2.55, 2.85]
+    },
+    {
+      "id": "front_enclosure",
+      "category": "ancillary",
+      "zh": "CM-700MM 前置移动防护罩",
+      "en": "Front Sliding CM-700MM Safety Enclosure & Shield",
+      "summary": "带有双条形深色钢化观察窗、竖向立体 DIN 字体 CM-700MM 铭牌及 C 型收卷前护板的整体拉丝不锈钢防护罩，检修时可沿正面平移打开。",
+      "principle": "密闭隔尘、隔热与防卷入安全联锁保护；配备安全光栅与电磁门锁，运行期间锁止，维护换辊时整体前移露出全部五辊与导辊组件。",
+      "materials": "SUS304 单向拉丝不锈钢折弯钣金（斜边倒角工艺），8mm 深灰钢化夹胶安全观察玻璃。",
+      "specs": [
+        { "k": "防护等级", "v": "IP54 密闭防尘" },
+        { "k": "铭牌型号", "v": "CM-700MM" },
+        { "k": "开启方式", "v": "前移剖视检修" },
+        { "k": "安全联锁", "v": "PLd 双通道门锁" }
+      ],
+      "explodeVector": [0.0, 0.0, 1.95],
+      "focusPos": [0.10, 1.25, 0.90],
+      "focusCam": [3.20, 1.75, 3.85]
+    },
+    {
+      "id": "hmi_pendant",
+      "category": "ancillary",
+      "zh": "悬臂式 HMI 触摸控制箱",
+      "en": "Overhead Cantilever HMI Operator Pendant",
+      "summary": "通过顶部白色方管龙门悬臂吊装于主机前侧的工业人机交互终端，集成彩色 SCADA 触控屏、启停物理按钮、急停蘑菇头及两侧不锈钢护手。",
+      "principle": "实时监控五辊线速度、各辊温度、辊缝闭环值、张力曲线与配方参数，支持一键联机启停与急停硬件硬接线切断。",
+      "materials": "烤漆铝合金压铸机箱 + 白色喷塑方管悬臂 + SUS304 抛光U型防撞拉手。",
+      "specs": [
+        { "k": "屏幕规格", "v": "15\" 工业电容触控" },
+        { "k": "硬接线按钮", "v": "启动 / 停止 / 复位 / 急停" },
+        { "k": "安装方式", "v": "顶部悬臂可旋转" },
+        { "k": "通讯协议", "v": "EtherCAT / PROFINET" }
+      ],
+      "explodeVector": [-0.85, 0.45, 1.85],
+      "focusPos": [-1.26, 1.25, 1.56],
+      "focusCam": [-1.20, 1.55, 3.55]
+    },
+    {
+      "id": "main_frame",
+      "category": "ancillary",
+      "zh": "重型后置机架与传动箱",
+      "en": "Heavy Rear Main Frame & Drive Cabinet",
+      "summary": "承载五辊高线压力反作用力的后置整体铸锻牌坊机架、精密伺服减速传动箱及后置导辊支撑墙板。",
+      "principle": "内部布置 5 套独立大扭矩永磁同步伺服电机与高精度行星/斜齿轮减速机，通过万向联轴器驱动五根压延辊实现无级速比匹配。",
+      "materials": "QT500 球墨铸铁退火牌坊壁板 + 外覆 SUS304 拉丝不锈钢降噪护罩。",
+      "specs": [
+        { "k": "传动方式", "v": "五辊独立伺服直驱" },
+        { "k": "机架刚度", "v": "满载变形 ≤ 5 μm" },
+        { "k": "后置观察窗", "v": "双竖向钢化检修窗" },
+        { "k": "底座结构", "v": "整体焊接去应力" }
+      ],
+      "explodeVector": [0.0, 0.0, -1.20],
+      "focusPos": [-0.15, 1.25, -0.95],
+      "focusCam": [-2.80, 1.85, -3.55]
+    },
+    {
+      "id": "safety_stairs",
+      "category": "ancillary",
+      "zh": "金色工业安全登高梯台",
+      "en": "Safety Staircase & Curved Platform Guardrails",
+      "summary": "位于设备最左侧的工业安全黄/金色管式钢制爬梯、6 级防滑花纹踏步、下部桁架斜撑及平台双门 U 型圆弧安全护栏。",
+      "principle": "符合 GB 4053 工业固定式钢梯安全标准，为操作人员提供前往高位供料平台加粉、清理料仓与巡检布料器的安全通道。",
+      "materials": "Q235 无缝圆钢管烤漆/粉末喷涂安全金黄色，铝合金防滑齿踏板。",
+      "specs": [
+        { "k": "踏步级数", "v": "6 级防滑踏步" },
+        { "k": "平台标高", "v": "1240 mm" },
+        { "k": "护栏高度", "v": "960 mm 工业防坠" },
+        { "k": "表面涂装", "v": "安全警示金色喷塑" }
+      ],
+      "explodeVector": [-1.45, 0.0, 0.35],
+      "focusPos": [-2.55, 1.15, 0.65],
+      "focusCam": [-4.65, 1.85, 3.45]
+    },
+    {
+      "id": "feeding_platform",
+      "category": "ancillary",
+      "zh": "上料检修平台与辅机框架",
+      "en": "Raised Feeding Platform & Auxiliary Sub-Frame",
+      "summary": "承托料仓与布料机构的高位拉丝金属检修平台、六柱方管支撑框架、平台配料箱及底部带脚轮移动式除尘/真空辅机单元。",
+      "principle": "上层承载高载重加粉作业，下层空间集约化布置干法粉尘负压回收模块与移动式抽真空辅机，便于推拉检修与滤芯更换。",
+      "materials": "拉丝不锈钢包覆平台甲板 + 工业重型方管焊接底架 + 聚氨酯静音重载脚轮。",
+      "specs": [
+        { "k": "平台承载", "v": "≥ 500 kg/m²" },
+        { "k": "底架结构", "v": "六柱重型方管框架" },
+        { "k": "下置辅机", "v": "带脚轮可抽出式" },
+        { "k": "防尘设计", "v": "负压粉尘收集接口" }
+      ],
+      "explodeVector": [-1.05, -0.10, -0.30],
+      "focusPos": [-1.74, 1.05, 0.10],
+      "focusCam": [-3.50, 1.60, 2.65]
+    },
+    {
+      "id": "control_desk",
+      "category": "ancillary",
+      "zh": "收卷侧置操作台",
+      "en": "Winder-Side Operator Control Desk",
+      "summary": "紧邻收卷工位后侧布置的斜面按钮操作台，集成 3×3 绿/红指示按钮阵列、急停开关与后置副监测屏，便于单手换卷调试。",
+      "principle": "专为收卷端就地操作优化，涵盖点动穿带、气胀轴充放气、张力投入、纠偏归中及收卷加速等高频工艺操作。",
+      "materials": "SUS304 拉丝不锈钢台体 + 白色烤漆斜面面板 + IP65 工业带灯金属按钮。",
+      "specs": [
+        { "k": "面板倾角", "v": "30° 人机工程斜面" },
+        { "k": "按键布局", "v": "3×3 指示按钮 + 急停" },
+        { "k": "副屏配置", "v": "卷径与张力实时监控" },
+        { "k": "功能定位", "v": "收卷就地快速调试" }
+      ],
+      "explodeVector": [0.95, 0.15, -0.35],
+      "focusPos": [2.00, 0.85, -0.82],
+      "focusCam": [3.65, 1.55, 0.75]
+    },
+    {
+      "id": "aux_thermal_unit",
+      "category": "ancillary",
+      "zh": "模温与液压循环辅机柜",
+      "en": "Thermal Oil & Hydraulic Power Unit Cabinet",
+      "summary": "位于设备右后侧的中型双门不锈钢辅机柜，带圆角深色观察窗、嵌入锁扣及多列百叶散热格栅，为压延辊提供精密油温控制与液压压力源。",
+      "principle": "内置多路高温导热油模温机（PID 控温 ±1 °C）与超高压伺服液压泵站，通过旋转接头与高压软管连接至五辊内部油道与加载油缸。",
+      "materials": "SUS304 拉丝不锈钢防腐蚀柜体，冲压防尘百叶通风门，圆角钢化视窗。",
+      "specs": [
+        { "k": "辊温控制精度", "v": "±1.0 °C" },
+        { "k": "液压系统压力", "v": "0 – 25 MPa 可调" },
+        { "k": "散热设计", "v": "6 列冲压百叶对流" },
+        { "k": "检修视窗", "v": "3 扇圆角安全观察窗" }
+      ],
+      "explodeVector": [1.35, 0.0, -0.95],
+      "focusPos": [2.14, 0.65, -2.20],
+      "focusCam": [4.55, 1.48, -0.20]
+    },
+    {
+      "id": "electrical_cabinet",
+      "category": "ancillary",
+      "zh": "主电控与 PLC 配电柜",
+      "en": "Main Electrical & PLC Control Cabinet",
+      "summary": "设备后方两联高大立式不锈钢电控柜，集成总断路器、五轴大功率伺服驱动器、高速运动控制 PLC 与工业以太网交换机。",
+      "principle": "实现五辊同步速度链控制、电子齿轮速比微调、张力 PID 算法、配方存储及与工厂 MES 系统的数据实时对接。",
+      "materials": "防电磁干扰镀锌安装底板 + 拉丝不锈钢双联威图式防护柜体。",
+      "specs": [
+        { "k": "供电规格", "v": "380V AC 3P / 50Hz" },
+        { "k": "总装机功率", "v": "≈ 120 kW" },
+        { "k": "核心控制器", "v": "高速 EtherCAT PLC" },
+        { "k": "数据对接", "v": "OPC-UA / MES 接口" }
+      ],
+      "explodeVector": [0.45, 0.25, -1.55],
+      "focusPos": [0.48, 1.10, -2.18],
+      "focusCam": [2.85, 2.05, -4.45]
+    }
+  ]
+}

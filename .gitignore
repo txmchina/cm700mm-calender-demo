@@ -1,0 +1,21 @@
+# macOS & OS files
+.DS_Store
+Thumbs.db
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+
+# Blender backup / temp files (keep primary .blend tracked)
+*.blend1
+*.blend2
+*.blend@
+*.crash.txt
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo

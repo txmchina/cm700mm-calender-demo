@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CM-700MM 多辊干法极片制膜装备 — 产品官网</title>
+  <link rel="stylesheet" href="website.css" />
+</head>
+<body>
+  <!-- ===================================================================== -->
+  <!-- 1. FIXED EDITORIAL WEBSITE NAVIGATION                                 -->
+  <!-- ===================================================================== -->
+  <header id="site-nav" class="site-nav">
+    <div class="nav-inner">
+      <a href="#ch-hero" class="nav-brand">
+        <span class="brand-mark">CM-700MM</span>
+        <span class="brand-sub">干法制膜装备</span>
+      </a>
+
+      <nav class="nav-links" aria-label="产品章节导航">
+        <a href="#ch-hero" class="nav-link active" data-chapter-link="0">概览</a>
+        <a href="#ch-cutaway" class="nav-link" data-chapter-link="1">结构剖视</a>
+        <a href="#ch-rolls" class="nav-link" data-chapter-link="2">五辊压延</a>
+        <a href="#ch-web" class="nav-link" data-chapter-link="3">张力收卷</a>
+        <a href="#ch-plant" class="nav-link" data-chapter-link="4">整线集成</a>
+        <a href="#specs" class="nav-link">技术规格</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="btn-enter-360-nav" class="btn-nav-360" type="button">
+          <span class="dot-live"></span>360° 自由探索
+        </button>
+        <a href="index.html" class="btn-nav-eng" title="切换至工程师全功能检视版">工程检视版 ↗</a>
+        <button class="btn-nav-cta js-open-inquiry" type="button">预约打样</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- 2. SCROLLYTELLING WRAPPER WITH STICKY SEAMLESS 3D STAGE               -->
+  <!-- ===================================================================== -->
+  <section id="story-wrapper" class="story-wrapper">
+    <!-- Sticky Full-Viewport 3D Stage -->
+    <div id="stage-sticky" class="stage-sticky">
+      <div id="web3d-host" class="web3d-host" aria-label="CM-700MM 交互式三维产品展示">
+        <!-- Fallback studio render shown immediately before WebGL ready or if WebGL unsupported -->
+        <img id="webgl-poster" class="webgl-poster" src="renders/01_overview.png" alt="CM-700MM 多辊干法制膜设备外观" />
+      </div>
+
+      <!-- Subtle non-blocking loading indicator -->
+      <div id="stage-loader" class="stage-loader">
+        <span class="loader-dot"></span>
+        <span id="stage-loader-text">正在加载 3D 精密样机…</span>
+      </div>
+
+      <!-- 3D Spatial Hotspots Layer (visible in 360° Interactive Mode) -->
+      <div id="hotspot-layer" class="hotspot-layer hidden" aria-label="3D 核心机构热点标注"></div>
+
+      <!-- Hotspot Popover Detail Card (visible when a hotspot is clicked in 360° Mode) -->
+      <aside id="hotspot-card" class="hotspot-card hidden" aria-live="polite">
+        <div class="hc-top">
+          <span id="hc-index" class="hc-index">01</span>
+          <span id="hc-tag" class="hc-tag">核心机构</span>
+          <button id="btn-close-hc" class="hc-close" type="button" aria-label="关闭说明">✕</button>
+        </div>
+        <h3 id="hc-title" class="hc-title">五辊阶梯精密压延主机</h3>
+        <p id="hc-desc" class="hc-desc"></p>
+        <div id="hc-metrics" class="hc-metrics"></div>
+      </aside>
+
+      <!-- Scrollytelling Right-Edge Chapter Progress Rail -->
+      <aside id="chapter-rail" class="chapter-rail" aria-label="浏览进度">
+        <button class="rail-dot active" data-goto="ch-hero" title="01 产品概览"></button>
+        <button class="rail-dot" data-goto="ch-cutaway" title="02 模块化开盖剖视"></button>
+        <button class="rail-dot" data-goto="ch-rolls" title="03 五辊阶梯压延"></button>
+        <button class="rail-dot" data-goto="ch-web" title="04 张力测厚与收卷"></button>
+        <button class="rail-dot" data-goto="ch-plant" title="05 整线人机集成"></button>
+        <span id="rail-counter" class="rail-counter">01 / 05</span>
+      </aside>
+
+      <!-- Opt-In 360° Interactive Mode HUD (hidden during normal scrolling) -->
+      <div id="explore-hud" class="explore-hud hidden">
+        <div class="explore-top-bar">
+          <div class="explore-badge">
+            <span class="dot-live"></span>
+            <strong>360° 自由探索模式</strong>
+            <span class="explore-hint-sep">·</span>
+            <span>左键拖拽旋转 · 右键平移 · 滚轮缩放 · 点击数字热点查看核心结构</span>
+          </div>
+          <button id="btn-exit-360" class="btn-exit-360" type="button">✕ 返回官网浏览 (Esc)</button>
+        </div>
+
+        <div class="explore-dock">
+          <div class="dock-segment" role="group" aria-label="展示模式">
+            <button class="exp-mode-btn active" data-exp-mode="solid" type="button">整机外观</button>
+            <button class="exp-mode-btn" data-exp-mode="cutaway" type="button">开盖剖视</button>
+            <button class="exp-mode-btn" data-exp-mode="xray" type="button">结构透视</button>
+          </div>
+          <div class="dock-divider"></div>
+          <button id="btn-toggle-hotspots" class="exp-tool-btn active" type="button">热点标注：开</button>
+          <button id="btn-reset-360" class="exp-tool-btn" type="button">重置视角</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- SCROLLYTELLING EDITORIAL CHAPTERS (OVERLAYING STICKY 3D STAGE)      -->
+    <!-- =================================================================== -->
+    <div id="chapters-track" class="chapters-track">
+
+      <!-- CHAPTER 0: HERO -->
+      <article id="ch-hero" class="chapter chapter-hero" data-chapter="0">
+        <div class="chapter-container align-left">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              <span>SOLVENT-FREE DRY ELECTRODE SERIES</span>
+            </div>
+            <h1 class="hero-title">
+              CM-700MM
+              <span class="hero-title-sub">多辊干法极片制膜装备</span>
+            </h1>
+            <p class="hero-lead">
+              面向动力与固态电池量产的 700 mm 宽幅五辊精密压延成膜系统。彻底告别 NMP 溶剂与百米干燥烘箱，以微米级膜厚一致性与连续化高速产能，重新定义下一代绿色极片制造。
+            </p>
+            <div class="hero-ctas">
+              <button class="btn-primary js-open-inquiry" type="button">预约工艺打样</button>
+              <button id="btn-enter-360-hero" class="btn-secondary" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path>
+                </svg>
+                360° 自由探索样机
+              </button>
+            </div>
+
+            <div class="hero-metrics">
+              <div class="hm-item">
+                <strong class="hm-val">700 <span>mm</span></strong>
+                <span class="hm-lbl">有效成膜幅宽</span>
+              </div>
+              <div class="hm-item">
+                <strong class="hm-val">±1.5 <span>μm</span></strong>
+                <span class="hm-lbl">闭环厚度精度</span>
+              </div>
+              <div class="hm-item">
+                <strong class="hm-val">60 <span>m/min</span></strong>
+                <span class="hm-lbl">最高连续线速</span>
+              </div>
+              <div class="hm-item">
+                <strong class="hm-val">0 <span>NMP</span></strong>
+                <span class="hm-lbl">干法零溶剂排放</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="#ch-cutaway" class="scroll-cue">
+            <span>向下滚动 · 剖视内部核心结构</span>
+            <span class="scroll-arrow">↓</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- CHAPTER 1: CUTAWAY REVEAL -->
+      <article id="ch-cutaway" class="chapter" data-chapter="1">
+        <div class="chapter-container align-left">
+          <div class="story-card">
+            <div class="card-kicker">01 / 模块化快拆与可视剖视</div>
+            <h2 class="card-title">全密闭拉丝防护，<br />一键滑移直达核心辊区</h2>
+            <p class="card-body">
+              前置 <strong>CM-700MM</strong> 重型拉丝不锈钢移动防护罩与 C 型收卷前护板采用精密直线导轨支撑。量产时全封闭隔绝粉尘与热辐射；换型清洁与点检时整体平稳外移，核心五辊与 10 组张力导辊即刻完整呈现。
+            </p>
+            <div class="card-stats">
+              <div class="cs-box">
+                <span class="cs-num">&lt; 90 s</span>
+                <span class="cs-txt">全辊系快速开放检修</span>
+              </div>
+              <div class="cs-box">
+                <span class="cs-num">IP54</span>
+                <span class="cs-txt">干法粉体密闭防护等级</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 2: 5-ROLL PRECISION STACK -->
+      <article id="ch-rolls" class="chapter" data-chapter="2">
+        <div class="chapter-container align-right">
+          <div class="story-card">
+            <div class="card-kicker">02 / 核心成膜压延主机</div>
+            <h2 class="card-title">五辊阶梯递进压延，<br />微米级致密自支撑成膜</h2>
+            <p class="card-body">
+              干混纤维化粉体经顶部定量供粉盒落入 R1–R2 喂料辊缝初步压片，随后经 R3 预压均厚，最终由双大径硬化镜面主辊 R4–R5 在最高 860 kN 线压力与 ±0.5 °C 热油恒温下定型，确保正负极膜面零针孔、高剥离强度。
+            </p>
+
+            <!-- Natural in-context interactive micro-demo: Speed selector -->
+            <div class="speed-demo-box">
+              <div class="sdb-head">
+                <span class="sdb-label">实时演示不同量产节拍</span>
+                <span id="live-throughput-pill" class="sdb-val">16.8 m²/min</span>
+              </div>
+              <div class="sdb-pills" role="group" aria-label="工艺线速演示">
+                <button class="speed-pill active" data-speed="24" type="button">24 m/min<small>工艺调试</small></button>
+                <button class="speed-pill" data-speed="45" type="button">45 m/min<small>量产标准</small></button>
+                <button class="speed-pill" data-speed="60" type="button">60 m/min<small>满载极限</small></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 3: S-WRAP TENSION & WINDING -->
+      <article id="ch-web" class="chapter" data-chapter="3">
+        <div class="chapter-container align-left">
+          <div class="story-card">
+            <div class="card-kicker">03 / 张力解耦与精密收卷</div>
+            <h2 class="card-title">10 导辊 S 型张力链，<br />全幅激光测厚无褶皱收卷</h2>
+            <p class="card-body">
+              成膜后的 700 mm 自支撑碳极片沿 5.98 m 精确相切 S 型路径穿过 G1–G10 低惯量导辊。G6–G7 构成水平激光测厚基准桥，实时反馈闭环调节辊缝；G8 浮动摆辊消除张力抖动，由 C 型开口气胀轴 W1 完成齐边收卷。
+            </p>
+            <div class="card-stats">
+              <div class="cs-box">
+                <span class="cs-num">±0.8 N</span>
+                <span class="cs-txt">全线闭环张力控制精度</span>
+              </div>
+              <div class="cs-box">
+                <span class="cs-num">100%</span>
+                <span class="cs-txt">在线全幅面激光测厚</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 4: TURNKEY PLANT & SAFETY -->
+      <article id="ch-plant" class="chapter" data-chapter="4">
+        <div class="chapter-container align-right">
+          <div class="story-card">
+            <div class="card-kicker">04 / 交钥匙整线与人机安全</div>
+            <h2 class="card-title">从上料塔架到智控终端，<br />符合车规产线交付标准</h2>
+            <p class="card-body">
+              整机集成 SUS316L 抛光粉料仓与定量布料台、符合 ISO 安全规范的金色防滑登高梯台、悬臂式 SCADA 工业触摸操作箱，以及后置独立模温液压循环站与双联 PLC 配电柜，缩短 40% 现场安装调试周期。
+            </p>
+            <button id="btn-enter-360-ch4" class="btn-card-action" type="button">
+              开启 360° 自由探索与热点解剖 →
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 3. BELOW-THE-FOLD EDITORIAL SECTIONS (B2B CONVERSION & SPECS)         -->
+  <!-- ===================================================================== -->
+  <main class="below-fold">
+
+    <!-- Interactive 360° Callout Banner -->
+    <section class="explore-callout-section">
+      <div class="section-inner">
+        <div class="explore-banner">
+          <div class="eb-text">
+            <span class="eb-kicker">INTERACTIVE 3D SHOWROOM</span>
+            <h2>想亲手 360° 旋转、剖开外壳细看内部机械？</h2>
+            <p>
+              进入沉浸式三维自由探索模式：无须安装任何插件，浏览器内实时旋转缩放、切换整机/剖视/透视视角，并点击 5 处关键机构热点查看详细工程说明。
+            </p>
+            <div class="eb-actions">
+              <button id="btn-enter-360-banner" class="btn-banner-primary" type="button">启动 360° 自由交互</button>
+              <a href="index.html" class="btn-banner-ghost">切换工程师全参数剖切版 ↗</a>
+            </div>
+          </div>
+          <div class="eb-visual">
+            <img src="renders/02_cutaway.png" alt="CM-700MM 多辊剖视细节预览" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Specifications Grid -->
+    <section id="specs" class="specs-section">
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="sh-kicker">TECHNICAL SPECIFICATIONS</span>
+          <h2 class="sh-title">核心技术规格参数</h2>
+          <p class="sh-sub">所有几何与工艺基准参数均与 CM-700MM 三维工程模型单一数据源实时同步。</p>
+        </div>
+
+        <div id="specs-grid" class="specs-grid">
+          <div class="spec-card">
+            <div class="sc-header">
+              <span class="sc-num">01</span>
+              <h3>压延与成膜核心</h3>
+            </div>
+            <dl class="sc-list">
+              <div><dt>设备型号</dt><dd id="spec-model">CM-700MM</dd></div>
+              <div><dt>有效成膜幅宽</dt><dd id="spec-width">700 mm</dd></div>
+              <div><dt>压延辊系构型</dt><dd>五辊阶梯精密排列（R1–R5）</dd></div>
+              <div><dt>适用膜厚范围</dt><dd>40 – 250 μm（典型 120 μm）</dd></div>
+              <div><dt>厚度控制精度</dt><dd>±1.5 μm（在线激光闭环）</dd></div>
+              <div><dt>最大轧制线压力</dt><dd id="spec-force">860 kN（液压弯辊补偿）</dd></div>
+            </dl>
+          </div>
+
+          <div class="spec-card">
+            <div class="sc-header">
+              <span class="sc-num">02</span>
+              <h3>温控、张力与传动</h3>
+            </div>
+            <dl class="sc-list">
+              <div><dt>连续运行线速度</dt><dd>2 – 60 m/min（伺服直驱同步）</dd></div>
+              <div><dt>辊面工作温度</dt><dd id="spec-temp">室温 – 180 °C（典型 135 °C ±0.5 °C）</dd></div>
+              <div><dt>张力与测厚导辊</dt><dd>10 组低惯量 S 型导辊（G1–G10）</dd></div>
+              <div><dt>收卷结构</dt><dd>C 型开口 3"/6" 气胀轴（W1）</dd></div>
+              <div><dt>全路径料带长度</dt><dd>5.977 m（全切线防褶皱导引）</dd></div>
+              <div><dt>溶剂与烘箱需求</dt><dd>0% NMP · 省去 100% 涂布烘箱能耗</dd></div>
+            </dl>
+          </div>
+
+          <div class="spec-card">
+            <div class="sc-header">
+              <span class="sc-num">03</span>
+              <h3>整机结构与配套</h3>
+            </div>
+            <dl class="sc-list">
+              <div><dt>整机参考尺寸</dt><dd>约 6.3 m × 4.2 m × 3.2 m</dd></div>
+              <div><dt>供粉与布料系统</dt><dd>SUS316L 抛光料斗 + 滑轨定量台</dd></div>
+              <div><dt>人机交互系统</dt><dd>悬臂式 SCADA 触摸屏 + 侧置操作台</dd></div>
+              <div><dt>温控液压辅机</dt><dd>独立双回路模温与伺服液压站</dd></div>
+              <div><dt>主控电气系统</dt><dd>双联立式 PLC / 伺服驱动配电柜</dd></div>
+              <div><dt>安全合规配置</dt><dd>ISO 防滑登高梯台 + 全围安全联锁</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Studio Render Gallery -->
+    <section class="gallery-section">
+      <div class="section-inner">
+        <div class="section-head">
+          <span class="sh-kicker">STUDIO VISUAL ARCHIVE</span>
+          <h2 class="sh-title">高精度影棚级渲染图集</h2>
+          <p class="sh-sub">由 Blender Cycles 物理光线追踪直接输出，点击任意视图放大审视材质与装配细节。</p>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-card" data-lightbox="renders/01_overview.png" data-caption="整机 3/4 外观总览 · DIN 立体铭牌与拉丝不锈钢机身">
+            <img src="renders/01_overview.png" alt="整机 3/4 外观总览" loading="lazy" />
+            <figcaption><strong>整机外观总览</strong><span>3/4 英雄视角 · 拉丝机身与 HMI 终端</span></figcaption>
+          </figure>
+          <figure class="gallery-card" data-lightbox="renders/02_cutaway.png" data-caption="前罩开启多辊剖视 · 五辊压延与 10 导辊 S 型料带链路">
+            <img src="renders/02_cutaway.png" alt="前罩开启多辊剖视" loading="lazy" />
+            <figcaption><strong>多辊内部剖视</strong><span>前罩滑移开启 · 完整展示干法成膜路径</span></figcaption>
+          </figure>
+          <figure class="gallery-card" data-lightbox="renders/03_rollers_closeup.png" data-caption="五辊压延主机微距特写 · CNC 同心车削轴承盖与碳极片微粒质感">
+            <img src="renders/03_rollers_closeup.png" alt="五辊压延主机微距特写" loading="lazy" />
+            <figcaption><strong>压延主机微距</strong><span>CNC 车削轴承盖 · 零穿模精准贴合</span></figcaption>
+          </figure>
+          <figure class="gallery-card" data-lightbox="renders/04_rear_34.png" data-caption="背面 3/4 视角 · 双联 PLC 电控柜、模温站与上料平台">
+            <img src="renders/04_rear_34.png" alt="背面 3/4 视角" loading="lazy" />
+            <figcaption><strong>整线背面集成</strong><span>PLC 电控柜 · 不锈钢供料仓与安全梯台</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Conversion Footer -->
+    <footer class="site-footer">
+      <div class="section-inner footer-inner">
+        <div class="footer-cta-block">
+          <h2>准备将干法制膜工艺引入您的电池产线？</h2>
+          <p>我们的工艺团队可提供免费正负极/固态电解质材料实验室压延打样、整线车间布局图（STEP/DWG）及投资回报测算。</p>
+          <div class="footer-btns">
+            <button class="btn-primary js-open-inquiry" type="button">预约实验室打样</button>
+            <button id="btn-download-spec" class="btn-secondary" type="button">下载规格书 JSON 摘要</button>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 CM-700MM Dry-Electrode Equipment Showcase · 100% 本地离线 WebGL + Draco 架构</span>
+          <div class="footer-links">
+            <a href="#ch-hero">返回顶部</a>
+            <a href="index.html">工程师剖切检视版</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- 4. B2B INQUIRY / SAMPLE BOOKING MODAL                                 -->
+  <!-- ===================================================================== -->
+  <div id="inquiry-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel">
+      <button id="btn-close-modal" class="modal-close" type="button" aria-label="关闭弹窗">✕</button>
+      <div id="modal-form-view">
+        <span class="modal-kicker">CM-700MM TECHNICAL CONSULTATION</span>
+        <h3 id="modal-title">预约干法制膜工艺打样 / 获取白皮书</h3>
+        <p class="modal-sub">填写您的工艺需求，我们将发送完整参数手册与中试打样排期。</p>
+        <form id="inquiry-form" class="inquiry-form">
+          <div class="form-row">
+            <label>姓名 <input type="text" name="name" required placeholder="例如：张工" /></label>
+            <label>公司 / 机构 <input type="text" name="company" required placeholder="例如：XX 新能源研究院" /></label>
+          </div>
+          <div class="form-row">
+            <label>工作邮箱 <input type="email" name="email" required placeholder="name@company.com" /></label>
+            <label>目标极片体系
+              <select name="material">
+                <option value="cathode">高镍三元 / 磷酸铁锂正极</option>
+                <option value="anode">石墨 / 硅碳负极</option>
+                <option value="solid">硫化物 / 氧化物固态电解质膜</option>
+                <option value="supercap">超级电容器活性炭极片</option>
+              </select>
+            </label>
+          </div>
+          <label>工艺要求备注（选填）
+            <textarea name="notes" rows="3" placeholder="目标幅宽、膜厚、目标压实密度或预计产能需求…"></textarea>
+          </label>
+          <button type="submit" class="btn-primary btn-full">提交预约并获取资料</button>
+        </form>
+      </div>
+      <div id="modal-success-view" class="modal-success hidden">
+        <div class="success-icon">✓</div>
+        <h3>预约信息已记录</h3>
+        <p>CM-700MM 工艺团队已收到您的打样与技术白皮书申请。您也可以继续在页面中开启 360° 自由探索或下载结构规格书。</p>
+        <button id="btn-done-modal" class="btn-primary" type="button">继续浏览产品</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal for Studio Renders -->
+  <div id="lightbox-modal" class="lightbox-backdrop hidden" role="dialog" aria-modal="true" aria-label="渲染图预览">
+    <button id="btn-close-lightbox" class="lightbox-close" type="button" aria-label="关闭大图">✕</button>
+    <figure class="lightbox-figure">
+      <img id="lightbox-img" src="" alt="" />
+      <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+  </div>
+
+  <!-- Local Offline Three.js r147 + Draco WASM + Shared Machine Loader -->
+  <script src="vendor/three.min.js"></script>
+  <script src="vendor/DRACOLoader.js"></script>
+  <script src="vendor/GLTFLoader.js"></script>
+  <script src="js/cm700-loader.js"></script>
+  <script src="js/website-scene.js"></script>
+</body>
+</html>

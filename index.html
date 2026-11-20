@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CM-700MM 多辊制膜设备 — 3D 精密数字孪生演示</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-theme="studio">
+  <div id="app-shell" class="app-shell">
+    <!-- 3D WebGL Viewport -->
+    <div id="viewport" class="viewport" role="region" aria-label="CM-700MM 多辊制膜设备三维交互视口">
+      <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p id="loading-text" class="loading-text">正在加载 Blender 3D 精密模型 (CM-700MM)…</p>
+      </div>
+
+      <div id="hover-tooltip" class="hover-tooltip hidden" aria-hidden="true">
+        <span class="tooltip-cat" id="tooltip-cat"></span>
+        <strong class="tooltip-zh" id="tooltip-zh"></strong>
+        <span class="tooltip-en" id="tooltip-en"></span>
+      </div>
+
+      <div id="isolate-banner" class="isolate-banner hidden">
+        <span>单独观察：<strong id="isolate-label">—</strong></span>
+        <button type="button" id="btn-exit-isolate" class="btn-chip-accent">恢复全部</button>
+      </div>
+
+      <div class="viewport-hint">
+        <span>左键旋转</span>
+        <span>右键/Shift平移</span>
+        <span>滚轮缩放</span>
+        <span>点击部件查看参数</span>
+        <span>快捷键 C 剖视 / Space 启停</span>
+      </div>
+
+      <div id="webgl-fallback" class="webgl-fallback hidden" role="alert">
+        <div class="fallback-card">
+          <h2>Three.js 渲染引擎未能加载</h2>
+          <p>请确保网络可访问 cdnjs / jsdelivr，或以本地 HTTP 服务打开本页面。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Top Bar -->
+    <header class="top-bar">
+      <div class="top-left">
+        <button type="button" id="btn-toggle-left" class="icon-btn" title="展开/收起结构导览">☰</button>
+        <div class="brand-compact">
+          <span class="badge-model">CM-700MM</span>
+          <h1 class="brand-title">多辊干法制膜设备 3D 模型</h1>
+        </div>
+      </div>
+
+      <div class="view-mode-pill" role="group" aria-label="观察模式">
+        <button type="button" class="mode-btn active" data-view-mode="solid">实体外观</button>
+        <button type="button" class="mode-btn" data-view-mode="cutaway">开盖剖视</button>
+        <button type="button" class="mode-btn" data-view-mode="xray">透视 X-Ray</button>
+      </div>
+
+      <div class="top-right">
+        <div class="kpi-strip" aria-label="实时工艺指标">
+          <div class="kpi-item">
+            <span class="kpi-label">线速</span>
+            <span class="kpi-val mono cyan"><strong id="kpi-speed">24.0</strong> <small>m/min</small></span>
+          </div>
+          <div class="kpi-item">
+            <span class="kpi-label">膜幅宽</span>
+            <span class="kpi-val mono"><strong>700</strong> <small>mm</small></span>
+          </div>
+          <div class="kpi-item">
+            <span class="kpi-label">膜厚</span>
+            <span class="kpi-val mono"><strong id="kpi-thickness">120</strong> <small>μm</small></span>
+          </div>
+          <div class="kpi-item">
+            <span class="kpi-label">产能</span>
+            <span class="kpi-val mono"><strong id="kpi-throughput">16.8</strong> <small>m²/min</small></span>
+          </div>
+        </div>
+        <button type="button" id="btn-toggle-theme" class="btn-ghost" title="切换展厅亮灰/暗场背景">暗场模式</button>
+        <button type="button" id="btn-reset-cam" class="btn-ghost" title="重置视角 (R)">重置视角</button>
+      </div>
+    </header>
+
+    <!-- Left Structure Directory Drawer -->
+    <aside id="left-panel" class="left-panel" aria-label="设备结构导览">
+      <div class="nav-header">
+        <div class="nav-title-wrap">
+          <span class="nav-title">设备结构导览</span>
+          <span class="count-pill mono" id="catalog-count">13/13</span>
+        </div>
+        <div class="nav-header-actions">
+          <button type="button" id="btn-show-all-parts" class="btn-link hidden">恢复全部</button>
+          <button type="button" id="btn-collapse-left" class="btn-mini" title="收起">✕</button>
+        </div>
+      </div>
+
+      <div class="nav-body">
+        <section class="tree-group">
+          <div class="tree-group-title">
+            <span>⚙ 核心压延与制膜系统</span>
+            <span>5</span>
+          </div>
+          <div id="dir-core-list" class="tree-items"></div>
+        </section>
+
+        <section class="tree-group">
+          <div class="tree-group-title">
+            <span>▣ 机架、护罩与电控辅机</span>
+            <span>8</span>
+          </div>
+          <div id="dir-ancillary-list" class="tree-items"></div>
+        </section>
+      </div>
+    </aside>
+
+    <!-- Right Engineering Detail Drawer -->
+    <aside id="right-drawer" class="right-drawer hidden" aria-label="部件工程参数">
+      <div class="drawer-header">
+        <span class="detail-badge" id="detail-badge">核心工艺机构</span>
+        <button type="button" id="btn-close-drawer" class="btn-mini" title="关闭">✕</button>
+      </div>
+
+      <div class="drawer-content">
+        <div>
+          <h2 id="detail-name-zh" class="detail-name-zh">—</h2>
+          <p id="detail-name-en" class="detail-name-en">—</p>
+        </div>
+
+        <p id="detail-summary" class="detail-summary">—</p>
+
+        <div class="detail-actions">
+          <button type="button" id="btn-focus-part" class="btn-primary">⌖ 聚焦观察</button>
+          <button type="button" id="btn-isolate-part" class="btn-secondary">◎ 单独看</button>
+          <button type="button" id="btn-hide-part" class="btn-ghost-sm">隐藏</button>
+        </div>
+
+        <div id="detail-key-specs" class="detail-specs-grid"></div>
+
+        <div class="detail-card">
+          <h4>工艺原理与协同机制</h4>
+          <p id="detail-principle">—</p>
+        </div>
+
+        <div class="detail-card">
+          <h4>典型材料与制造标准</h4>
+          <p id="detail-materials">—</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Bottom Floating Control Dock -->
+    <footer class="bottom-dock" aria-label="工艺控制与视角切换">
+      <div class="dock-group">
+        <button type="button" id="btn-play-pause" class="btn-pill active">⏸ 暂停运转</button>
+        <button type="button" id="btn-video-demo" class="btn-pill video-btn">🎬 视频同款演示</button>
+      </div>
+
+      <div class="dock-divider"></div>
+
+      <div class="dock-group">
+        <div class="slider-box">
+          <div class="slider-top">
+            <span>前罩剖视</span>
+            <strong id="val-cutaway" class="mono">0%</strong>
+          </div>
+          <input type="range" id="slider-cutaway" min="0" max="100" value="0" />
+        </div>
+
+        <div class="slider-box">
+          <div class="slider-top">
+            <span>爆炸拆解</span>
+            <strong id="val-explode" class="mono">0%</strong>
+          </div>
+          <input type="range" id="slider-explode" min="0" max="100" value="0" />
+        </div>
+
+        <div class="slider-box">
+          <div class="slider-top">
+            <span>线速度</span>
+            <strong id="val-speed" class="mono">24 m/min</strong>
+          </div>
+          <input type="range" id="slider-speed" min="2" max="60" value="24" />
+        </div>
+      </div>
+
+      <div class="dock-divider"></div>
+
+      <div class="preset-strip" aria-label="相机预设">
+        <button type="button" class="preset-btn active" data-preset="overview">整机总览</button>
+        <button type="button" class="preset-btn" data-preset="cutaway">多辊剖视</button>
+        <button type="button" class="preset-btn" data-preset="rollers">五辊特写</button>
+        <button type="button" class="preset-btn" data-preset="feeder">爬梯上料</button>
+        <button type="button" class="preset-btn" data-preset="winder">收卷电控</button>
+        <button type="button" class="preset-btn" data-preset="rear">背面视角</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 100% Offline Local Three.js r147 + Draco WASM + GLTFLoader (Zero External CDN) -->
+  <script src="vendor/three.min.js"></script>
+  <script src="vendor/DRACOLoader.js"></script>
+  <script src="vendor/GLTFLoader.js"></script>
+  <script src="js/cm700-loader.js"></script>
+  <script src="js/app-scene.js"></script>
+</body>
+</html>
