@@ -19,3 +19,7 @@ __pycache__/
 .idea/
 *.swp
 *.swo
+
+# Static hosting deploy staging
+dist/
+

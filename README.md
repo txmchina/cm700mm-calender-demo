@@ -23,8 +23,8 @@
   - `renders/03_rollers_closeup.png` — 五辊压延主机与 S 型导辊微距特写
   - `renders/04_rear_34.png` — 背面 3/4 视角（后置传动箱、电控柜与上料平台）
 - **本地离线 WebGL 引擎与交互页**：
-  - `website.html` + `website.css` + `js/website-scene.js` — **场景一：官方产品展示页**（无滚轮劫持 5 章节滚动叙事 Scrollytelling、浅色影棚无缝融底、按需开启 360° 自由探索与 5 处空间热点）
-  - `index.html` + `styles.css` + `js/app-scene.js` — **工程师全参数剖切检视版**（13 组部件目录树、爆炸拆解、X-Ray 透视、13 秒视频同款演示）
+  - `index.html` + `website.css` + `js/website-scene.js` — **默认首页 · 场景一：官方产品展示页**（无滚轮劫持 5 章节滚动叙事 Scrollytelling、浅色影棚无缝融底、按需开启 360° 自由探索与 5 处空间热点）
+  - `engineer.html` + `styles.css` + `js/app-scene.js` — **工程师全参数剖切检视版**（13 组部件目录树、爆炸拆解、X-Ray 透视、13 秒视频同款演示）
   - `vendor/` — 本地离线 Three.js r147 + GLTFLoader + DRACOLoader + WASM 解码器
 
 ## 核心建模结构（13 个工程子系统）
