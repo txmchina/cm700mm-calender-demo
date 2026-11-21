@@ -25,6 +25,7 @@
 - **本地离线 WebGL 引擎与交互页**：
   - `index.html` + `website.css` + `js/website-scene.js` — **默认首页 · 场景一：官方产品展示页**（无滚轮劫持 5 章节滚动叙事 Scrollytelling、浅色影棚无缝融底、按需开启 360° 自由探索与 5 处空间热点）
   - `expo.html` + `expo.css` + `js/expo-scene.js` — **场景二：展会大屏互动演示**（4K LED 暗场展台光环、45 秒五幕无人值守循环巡演、大按钮多点触控与无线翻页笔热键 `1-5/C/X/E/F/H`、25 秒无操作自动恢复巡演）
+  - `twin.html` + `twin.css` + `js/twin-scene.js` — **场景三：真实工业数字孪生中控平台**（10 Hz 物理耦合 SCADA/MES 仿真与 OPC-UA/WebSocket 协议接口、24 分区在线激光横向测厚剖面图、3D 热力场图与受力负荷场叠加、空间传感器实时浮标、闭环工艺控制、急停联锁与 3 类故障演练 3D 定位）
   - `engineer.html` + `styles.css` + `js/app-scene.js` — **工程师全参数剖切检视版**（13 组部件目录树、爆炸拆解、X-Ray 透视、13 秒视频同款演示）
   - `vendor/` — 本地离线 Three.js r147 + GLTFLoader + DRACOLoader + WASM 解码器
 

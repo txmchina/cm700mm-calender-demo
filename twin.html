@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CM-700MM 工业数字孪生中控平台 — SCADA / MES 实时孪生</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="twin.css" />
+</head>
+<body>
+  <div id="twin-app" class="twin-app">
+    <!-- =================================================================== -->
+    <!-- 1. TOP SCADA / MES COMMAND HEADER                                   -->
+    <!-- =================================================================== -->
+    <header class="scada-header">
+      <div class="sh-left">
+        <button id="btn-toggle-left" class="sh-icon-btn" type="button" title="展开/收起左侧监测面板">◧</button>
+        <div class="sh-brand">
+          <span class="sh-badge">CM-700MM</span>
+          <div class="sh-title-group">
+            <h1>干法制膜数字孪生中控</h1>
+            <span class="sh-sub">LINE-03 · LOT-LFP08</span>
+          </div>
+        </div>
+        <div id="conn-pill" class="conn-pill">
+          <span class="conn-dot"></span>
+          <span id="conn-label">OPC-UA 10Hz</span>
+        </div>
+      </div>
+
+      <div class="sh-center">
+        <div class="seg-control" role="group" aria-label="3D 数据场叠加模式">
+          <button class="overlay-btn active" data-overlay="pbr" type="button">物理实景</button>
+          <button class="overlay-btn" data-overlay="thermal" type="button">热力场图</button>
+          <button class="overlay-btn" data-overlay="load" type="button">受力负荷</button>
+        </div>
+
+        <div class="sh-sep"></div>
+
+        <div class="sh-toggles">
+          <button id="btn-twin-cutaway" class="mini-toggle active" type="button" title="切换前置防护罩开合 (C)">剖视开盖</button>
+          <button id="btn-twin-xray" class="mini-toggle" type="button" title="透视外壳 (X)">X-Ray</button>
+          <button id="btn-twin-pins" class="mini-toggle active" type="button" title="显示/隐藏 3D 空间传感器浮标">空间传感器</button>
+        </div>
+      </div>
+
+      <div class="sh-right">
+        <span id="scada-clock" class="scada-clock">00:00:00</span>
+        <div id="run-state-badge" class="run-state-badge state-run">● RUN 运行中</div>
+        <div class="sh-nav-links">
+          <a href="index.html" class="sh-nav-a">官网</a>
+          <a href="expo.html" class="sh-nav-a">展会</a>
+          <a href="engineer.html" class="sh-nav-a">工程</a>
+        </div>
+        <button id="btn-toggle-right" class="sh-icon-btn" type="button" title="展开/收起右侧控制与告警面板">◨</button>
+      </div>
+    </header>
+
+    <!-- =================================================================== -->
+    <!-- 2. THREE-COLUMN CONTROL-ROOM WORKSPACE                              -->
+    <!-- =================================================================== -->
+    <div class="twin-workspace">
+
+      <!-- LEFT RAIL: MES KPIs, LASER PROFILE, LIVE CHARTS & 5-ROLL MATRIX -->
+      <aside id="left-rail" class="rail rail-left" aria-label="实时工艺与设备遥测">
+        <!-- Card 1: MES Production Overview -->
+        <section class="panel-card">
+          <div class="pc-head">
+            <span class="pc-title">MES 产线实时概览</span>
+            <span class="pc-tag">SHIFT-A</span>
+          </div>
+          <div class="mes-grid">
+            <div class="mes-cell">
+              <span class="mc-k">设备综合效率 OEE</span>
+              <strong id="mes-oee" class="mc-v emerald">94.6%</strong>
+            </div>
+            <div class="mes-cell">
+              <span class="mc-k">极片一次良率</span>
+              <strong id="mes-yield" class="mc-v cyan">99.2%</strong>
+            </div>
+            <div class="mes-cell">
+              <span class="mc-k">本卷累计米数</span>
+              <strong id="mes-meters" class="mc-v">1,428.6 <small>m</small></strong>
+            </div>
+            <div class="mes-cell">
+              <span class="mc-k">实时面积产能</span>
+              <strong id="mes-output" class="mc-v">16.8 <small>m²/m</small></strong>
+            </div>
+          </div>
+        </section>
+
+        <!-- Card 2: Online 24-Zone Laser Cross-Web Thickness Profile -->
+        <section class="panel-card">
+          <div class="pc-head">
+            <span class="pc-title">在线激光横向测厚剖面 (700 mm)</span>
+            <span id="thick-live-badge" class="pc-val cyan">120.1 μm</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chart-profile" width="270" height="96"></canvas>
+          </div>
+          <div class="chart-foot">
+            <span>目标 120.0 μm · 公差 ±1.5 μm</span>
+            <span id="profile-sigma">σ = 0.38 μm</span>
+          </div>
+        </section>
+
+        <!-- Card 3: Live Scrolling Time-Series Oscilloscope -->
+        <section class="panel-card">
+          <div class="pc-head">
+            <span class="pc-title">张力 &amp; 主辊线压实时趋势</span>
+            <span id="tension-live-badge" class="pc-val">42.0 N</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chart-trend" width="270" height="92"></canvas>
+          </div>
+          <div class="chart-legend">
+            <span><i class="lg-dot c-cyan"></i> 闭环张力 (N)</span>
+            <span><i class="lg-dot c-amber"></i> 主辊压力 (kN)</span>
+          </div>
+        </section>
+
+        <!-- Card 4: 5-Roll Individual Telemetry Matrix (Clickable to Focus!) -->
+        <section class="panel-card panel-grow">
+          <div class="pc-head">
+            <span class="pc-title">五辊独立温控与负荷矩阵</span>
+            <span class="pc-hint">点击定位辊轴</span>
+          </div>
+          <div id="roll-matrix" class="roll-matrix">
+            <!-- Populated dynamically by twin-scene.js -->
+          </div>
+        </section>
+      </aside>
+
+      <!-- CENTER: LIVE 3D DIGITAL TWIN STAGE -->
+      <main class="stage-center">
+        <div id="twin-canvas-host" class="twin-canvas-host" aria-label="CM-700MM 三维数字孪生主视口"></div>
+
+        <!-- Loading Overlay -->
+        <div id="twin-loader" class="twin-loader">
+          <span class="loader-spin"></span>
+          <span id="twin-loader-text">正在建立三维孪生体与 10 Hz 传感器映射…</span>
+        </div>
+
+        <!-- Live Active Alarm Banner (appears when an alarm is triggered) -->
+        <div id="alarm-banner" class="alarm-banner hidden" role="alert">
+          <div class="ab-icon">⚠</div>
+          <div class="ab-body">
+            <strong id="ab-title">ALM-401 · R4 主压延上辊轴承超温告警</strong>
+            <span id="ab-sop">建议处置：降速至 15 m/min，核查模温机 2# 回路循环流量与旋转接头压力。</span>
+          </div>
+          <div class="ab-actions">
+            <button id="btn-ab-focus" class="ab-btn-focus" type="button">3D 定位</button>
+            <button id="btn-ab-resolve" class="ab-btn-resolve" type="button">一键处置</button>
+          </div>
+        </div>
+
+        <!-- 3D Projected Spatial Sensor Badges -->
+        <div id="sensor-pins-layer" class="sensor-pins-layer" aria-label="3D 空间传感器实时浮标"></div>
+
+        <!-- Thermal / Load Scale Legend (shown automatically in Thermal or Load overlay mode) -->
+        <div id="field-legend" class="field-legend hidden">
+          <span id="fl-title" class="fl-title">辊面温度场 (°C)</span>
+          <div id="fl-bar" class="fl-bar fl-thermal"></div>
+          <div class="fl-ticks">
+            <span id="fl-min">85°C</span>
+            <span id="fl-mid">130°C</span>
+            <span id="fl-max">175°C</span>
+          </div>
+        </div>
+
+        <!-- Bottom-Center Camera Quick-Focus Strip -->
+        <div class="cam-strip" role="group" aria-label="监控机位快速切换">
+          <button class="cam-btn active" data-cam="overview" type="button">整机监控</button>
+          <button class="cam-btn" data-cam="rolls" type="button">五辊核心</button>
+          <button class="cam-btn" data-cam="gauge" type="button">激光测厚</button>
+          <button class="cam-btn" data-cam="winder" type="button">收卷工位</button>
+          <button class="cam-btn" data-cam="hopper" type="button">上料料仓</button>
+          <button class="cam-btn" data-cam="rear" type="button">电控模温</button>
+        </div>
+      </main>
+
+      <!-- RIGHT RAIL: CLOSED-LOOP PROCESS CONTROL & ALARM / FAULT CONSOLE -->
+      <aside id="right-rail" class="rail rail-right" aria-label="工艺闭环控制与告警中心">
+        <!-- Card 1: Run / Pause / E-Stop Control -->
+        <section class="panel-card">
+          <div class="pc-head">
+            <span class="pc-title">产线主控指令 (PLC 下发)</span>
+            <button id="btn-open-ws" class="pc-link-btn" type="button" title="查看或配置真实 OPC-UA / WebSocket 接口">数据源配置</button>
+          </div>
+          <div class="cmd-btn-row">
+            <button id="btn-cmd-run" class="cmd-btn cmd-run active" type="button">▶ 启动运行</button>
+            <button id="btn-cmd-pause" class="cmd-btn cmd-pause" type="button">⏸ 工艺暂停</button>
+            <button id="btn-cmd-estop" class="cmd-btn cmd-estop" type="button">⛔ 紧急停机</button>
+          </div>
+        </section>
+
+        <!-- Card 2: Closed-Loop Setpoints (Bi-Directional Twin Control) -->
+        <section class="panel-card">
+          <div class="pc-head">
+            <span class="pc-title">闭环工艺设定值 (SETPOINTS)</span>
+            <span class="pc-tag">PID AUTO</span>
+          </div>
+
+          <div class="sp-list">
+            <div class="sp-item">
+              <div class="sp-row">
+                <span>目标线速度</span>
+                <strong id="sp-speed-val" class="mono cyan">24 m/min</strong>
+              </div>
+              <input id="sp-speed" type="range" min="6" max="60" step="1" value="24" />
+            </div>
+
+            <div class="sp-item">
+              <div class="sp-row">
+                <span>主辊目标温度 (R4/R5)</span>
+                <strong id="sp-temp-val" class="mono amber">135 °C</strong>
+              </div>
+              <input id="sp-temp" type="range" min="90" max="175" step="1" value="135" />
+            </div>
+
+            <div class="sp-item">
+              <div class="sp-row">
+                <span>主辊轧制线压力</span>
+                <strong id="sp-force-val" class="mono">860 kN</strong>
+              </div>
+              <input id="sp-force" type="range" min="400" max="1200" step="10" value="860" />
+            </div>
+
+            <div class="sp-item">
+              <div class="sp-row">
+                <span>收卷闭环张力</span>
+                <strong id="sp-tension-val" class="mono">42 N</strong>
+              </div>
+              <input id="sp-tension" type="range" min="20" max="80" step="1" value="42" />
+            </div>
+          </div>
+        </section>
+
+        <!-- Card 3: Fault Simulation & Alarm Diagnostics Console -->
+        <section class="panel-card panel-grow">
+          <div class="pc-head">
+            <span class="pc-title">告警诊断与故障演练</span>
+            <span id="alarm-count-pill" class="alarm-count is-ok">0 告警</span>
+          </div>
+
+          <div class="fault-sim-grid">
+            <button class="fault-btn" data-fault="r4_overheat" type="button">🔥 R4 超温</button>
+            <button class="fault-btn" data-fault="web_thick" type="button">📏 膜厚超差</button>
+            <button class="fault-btn" data-fault="hopper_low" type="button">📦 料仓低位</button>
+            <button id="btn-clear-faults" class="fault-btn fault-clear" type="button">✓ 全部复位</button>
+          </div>
+
+          <div id="alarm-log" class="alarm-log" aria-live="polite">
+            <!-- Live timestamped alarm & event cards -->
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- DATA SOURCE / REAL OPC-UA & WEBSOCKET ADAPTER MODAL                   -->
+  <!-- ===================================================================== -->
+  <div id="ws-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="ws-modal-title">
+    <div class="modal-panel">
+      <div class="mp-head">
+        <h3 id="ws-modal-title">实时遥测数据源接入 (TelemetryBus)</h3>
+        <button id="btn-close-ws" class="mp-close" type="button" aria-label="关闭">✕</button>
+      </div>
+      <p class="mp-desc">
+        当前运行内置的 <strong>10 Hz 干法压延物理仿真引擎</strong>。生产环境可直接切换至工厂 OPC-UA Gateway / MQTT-over-WS 推送地址，JSON 协议保持 100% 兼容：
+      </p>
+      <pre class="mp-code">{
+  "ts": 1763736000000,
+  "state": "RUN",
+  "lineSpeed": 24.0,
+  "rolls": [
+    { "id": "R1", "tempC": 95.1, "forceKn": 182, "loadPct": 44 },
+    { "id": "R4", "tempC": 135.2, "forceKn": 860, "loadPct": 72 }
+  ],
+  "thicknessProfileUm": [119.8, 120.1, "...24 zones"],
+  "webTensionN": 42.3,
+  "winderDiaMm": 312.4,
+  "hopperLevelPct": 74.2
+}</pre>
+      <div class="mp-input-row">
+        <input id="ws-url-input" type="text" placeholder="wss://factory-mes.internal/ws/cm700mm-line03" />
+        <button id="btn-ws-connect" class="mp-btn-primary" type="button">测试连接</button>
+      </div>
+      <p id="ws-status-msg" class="mp-status">当前模式：内置物理耦合仿真器（零外部依赖，支持离线中控演示）</p>
+    </div>
+  </div>
+
+  <!-- Local Offline Three.js r147 + Draco WASM + Shared Machine Loader -->
+  <script src="vendor/three.min.js"></script>
+  <script src="vendor/DRACOLoader.js"></script>
+  <script src="vendor/GLTFLoader.js"></script>
+  <script src="js/cm700-loader.js"></script>
+  <script src="js/twin-scene.js"></script>
+</body>
+</html>
