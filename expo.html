@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>CM-700MM 多辊干法制膜装备 — 展会大屏互动演示</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="expo.css" />
+</head>
+<body>
+  <div id="expo-stage" class="expo-stage">
+    <!-- Full-Bleed 100vw x 100vh 3D Exhibition Canvas -->
+    <div id="expo-canvas-host" class="expo-canvas-host" aria-label="CM-700MM 展会大屏三维实时演示">
+      <img id="expo-poster" class="expo-poster" src="renders/01_overview.png" alt="CM-700MM 展会主视觉" />
+    </div>
+
+    <!-- Subtle Ambient Top/Bottom Vignette for Broadcast Readability -->
+    <div class="stage-vignette" aria-hidden="true"></div>
+
+    <!-- Non-Blocking Loading Pill -->
+    <div id="expo-loader" class="expo-loader">
+      <span class="loader-ring"></span>
+      <span id="expo-loader-text">正在初始化 CM-700MM 展会 3D 引擎…</span>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- TOP-LEFT: BRAND CREST & LIVE SHOWREEL STATUS                        -->
+    <!-- =================================================================== -->
+    <header class="expo-top-left">
+      <div class="brand-crest">
+        <span class="crest-code">CM-700MM</span>
+        <div class="crest-titles">
+          <h1>多辊干法极片制膜装备</h1>
+          <span>MULTI-ROLL DRY-ELECTRODE CALENDERING LINE</span>
+        </div>
+      </div>
+
+      <div id="mode-status-pill" class="mode-status-pill is-auto">
+        <span class="status-pulse"></span>
+        <span id="status-mode-label">无人值守巡演 · ACT 01 / 05</span>
+        <span id="idle-countdown" class="idle-countdown hidden">25s 后自动恢复</span>
+      </div>
+    </header>
+
+    <!-- =================================================================== -->
+    <!-- TOP-RIGHT: BOOTH CONTROLS (FULLSCREEN / CLEAN WALL / SCENARIO JUMP) -->
+    <!-- =================================================================== -->
+    <div class="expo-top-right">
+      <button id="btn-clean-wall" class="expo-top-btn" type="button" title="隐藏底部操控栏，切换纯 LED 大屏轮播 (快捷键 H)">
+        纯净大屏 <kbd>H</kbd>
+      </button>
+      <button id="btn-fullscreen" class="expo-top-btn" type="button" title="进入/退出全屏展示 (快捷键 F)">
+        全屏展示 <kbd>F</kbd>
+      </button>
+      <div class="scenario-switcher">
+        <a href="index.html" class="sw-link" title="切换至官网产品展示页">官网版</a>
+        <a href="engineer.html" class="sw-link" title="切换至工程师全参数检视版">工程版</a>
+      </div>
+    </div>
+
+    <!-- Floating Restore Button shown ONLY in Clean LED Wall Mode -->
+    <button id="btn-restore-hud" class="btn-restore-hud hidden" type="button" title="恢复触控操作栏 (H)">
+      显示触控栏 (H)
+    </button>
+
+    <!-- =================================================================== -->
+    <!-- RIGHT-EDGE: GIANT GLANCEABLE KPI CARDS (READABLE FROM 8m AWAY)      -->
+    <!-- =================================================================== -->
+    <aside class="expo-kpi-column" aria-label="核心性能指标">
+      <div class="kpi-tile">
+        <span class="kt-label">有效成膜幅宽 · WIDTH</span>
+        <strong class="kt-val">700 <small>mm</small></strong>
+      </div>
+      <div class="kpi-tile">
+        <span class="kt-label">闭环厚度精度 · PRECISION</span>
+        <strong class="kt-val">±1.5 <small>μm</small></strong>
+      </div>
+      <div class="kpi-tile is-live">
+        <span class="kt-label">当前压延线速 · SPEED</span>
+        <strong class="kt-val cyan"><span id="expo-kpi-speed">24.0</span> <small>m/min</small></strong>
+      </div>
+      <div class="kpi-tile is-live">
+        <span class="kt-label">实时成膜产能 · OUTPUT</span>
+        <strong class="kt-val"><span id="expo-kpi-output">16.8</span> <small>m²/min</small></strong>
+      </div>
+      <div class="kpi-badge-green">
+        <span class="green-dot"></span>
+        <span>0% NMP · 全干法零溶剂排放</span>
+      </div>
+    </aside>
+
+    <!-- =================================================================== -->
+    <!-- LOWER-LEFT: CINEMATIC BROADCAST LOWER-THIRD CAPTION                 -->
+    <!-- =================================================================== -->
+    <section id="expo-lower-third" class="expo-lower-third" aria-live="polite">
+      <div class="lt-kicker">
+        <span id="lt-act-num" class="lt-act-num">ACT 01</span>
+        <span id="lt-act-tag" class="lt-act-tag">旗舰外观巡航 · FLAGSHIP OVERVIEW</span>
+      </div>
+      <h2 id="lt-headline" class="lt-headline">700 mm 宽幅干法极片制膜旗舰</h2>
+      <p id="lt-subline" class="lt-subline">省去 NMP 有毒溶剂与百米烘箱，以五辊精密压延重塑动力与固态电池极片制造</p>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- BOTTOM-CENTER: GIANT TOUCH-FRIENDLY PRESENTER DOCK                  -->
+    <!-- =================================================================== -->
+    <nav id="expo-dock" class="expo-dock" aria-label="展会讲解员触控导航栏">
+      <!-- 5 Showreel Scenes (Keys 1-5) -->
+      <div class="dock-group" role="group" aria-label="五大核心展演视角">
+        <button class="act-btn active" data-act="0" type="button">
+          <span class="key-cap">1</span><span>整机全景</span>
+        </button>
+        <button class="act-btn" data-act="1" type="button">
+          <span class="key-cap">2</span><span>开盖剖视</span>
+        </button>
+        <button class="act-btn" data-act="2" type="button">
+          <span class="key-cap">3</span><span>五辊微距</span>
+        </button>
+        <button class="act-btn" data-act="3" type="button">
+          <span class="key-cap">4</span><span>张力收卷</span>
+        </button>
+        <button class="act-btn" data-act="4" type="button">
+          <span class="key-cap">5</span><span>爆炸拆解</span>
+        </button>
+      </div>
+
+      <div class="dock-sep"></div>
+
+      <!-- Instant Show-Stopper Toggles -->
+      <div class="dock-group" role="group" aria-label="即时形态切换">
+        <button id="btn-exp-cutaway" class="toggle-btn" type="button" title="前罩开盖剖视 (C)">开盖</button>
+        <button id="btn-exp-xray" class="toggle-btn" type="button" title="透视外壳 (X)">透视</button>
+        <button id="btn-exp-explode" class="toggle-btn" type="button" title="整机爆炸拆解 (E)">爆炸</button>
+        <button id="btn-exp-speed" class="speed-cycle-btn" type="button" title="点击切换产线演示节拍 (24 / 45 / 60 m/min)">
+          <span id="btn-speed-text">24 m/min</span>
+        </button>
+      </div>
+
+      <div class="dock-sep"></div>
+
+      <!-- Playback & Reset -->
+      <div class="dock-group">
+        <button id="btn-exp-play" class="play-btn is-playing" type="button" title="暂停/恢复无人值守自动巡演 (Space)">
+          ⏸ 巡演中
+        </button>
+        <button id="btn-exp-reset" class="icon-reset-btn" type="button" title="一键重置并恢复全景 (R)">↺</button>
+      </div>
+    </nav>
+
+    <!-- Bottom Full-Width Broadcast Showreel Progress Bar -->
+    <div class="expo-progress-track" aria-hidden="true">
+      <div id="expo-progress-fill" class="expo-progress-fill"></div>
+      <div class="progress-ticks">
+        <span style="left: 20%"></span>
+        <span style="left: 40%"></span>
+        <span style="left: 60%"></span>
+        <span style="left: 80%"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Local Offline Three.js r147 + Draco WASM + Shared Machine Loader -->
+  <script src="vendor/three.min.js"></script>
+  <script src="vendor/DRACOLoader.js"></script>
+  <script src="vendor/GLTFLoader.js"></script>
+  <script src="js/cm700-loader.js"></script>
+  <script src="js/expo-scene.js"></script>
+</body>
+</html>

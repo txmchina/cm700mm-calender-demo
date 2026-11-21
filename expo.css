@@ -1,0 +1,734 @@
+/* ==========================================================================
+   CM-700MM Exhibition Big-Screen & Touch Kiosk Stylesheet (Scenario 2)
+   High-Contrast Dark Obsidian LED Wall Aesthetic + Large Touch Targets
+   ========================================================================== */
+
+:root {
+  --bg-void: #060a12;
+  --glass-dark: rgba(9, 14, 24, 0.78);
+  --glass-dark-strong: rgba(8, 13, 22, 0.90);
+  --border-subtle: rgba(148, 163, 184, 0.20);
+  --border-bright: rgba(56, 189, 248, 0.50);
+  --ink-white: #f8fafc;
+  --ink-soft: #cbd5e1;
+  --ink-dim: #94a3b8;
+  --cyan: #38bdf8;
+  --cyan-bright: #67e8f9;
+  --cyan-glow: rgba(56, 189, 248, 0.26);
+  --amber: #f59e0b;
+  --emerald: #34d399;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-void);
+  color: var(--ink-white);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   1. FULL-BLEED 3D STAGE
+   ========================================================================== */
+.expo-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at 48% 52%, #131e30 0%, #080d16 55%, #05080f 100%);
+}
+
+.expo-canvas-host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.expo-canvas-host:active {
+  cursor: grabbing;
+}
+
+.expo-canvas-host canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
+
+.expo-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.45) contrast(1.1);
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+.expo-poster.fade-out {
+  opacity: 0;
+}
+
+.stage-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background:
+    linear-gradient(180deg, rgba(5, 8, 15, 0.58) 0%, rgba(5, 8, 15, 0.0) 18%, rgba(5, 8, 15, 0.0) 74%, rgba(5, 8, 15, 0.72) 100%),
+    linear-gradient(90deg, rgba(5, 8, 15, 0.36) 0%, rgba(5, 8, 15, 0.0) 24%, rgba(5, 8, 15, 0.0) 80%, rgba(5, 8, 15, 0.38) 100%);
+}
+
+/* Loading Pill */
+.expo-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: var(--glass-dark-strong);
+  border: 1px solid var(--border-bright);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.55);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-white);
+  transition: opacity 0.45s ease;
+}
+
+.expo-loader.done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-ring {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(56, 189, 248, 0.25);
+  border-top-color: var(--cyan);
+  animation: spinRing 0.85s linear infinite;
+}
+
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   2. TOP-LEFT BRAND CREST & SHOWREEL STATUS
+   ========================================================================== */
+.expo-top-left {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.brand-crest {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 18px 10px 12px;
+  border-radius: 16px;
+  background: var(--glass-dark);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.crest-code {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(14, 165, 233, 0.08));
+  border: 1px solid var(--border-bright);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--cyan-bright);
+}
+
+.crest-titles h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink-white);
+  line-height: 1.25;
+}
+
+.crest-titles span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--ink-dim);
+  margin-top: 2px;
+}
+
+.mode-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(9, 14, 24, 0.72);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.status-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  animation: pulseBeacon 1.6s ease-in-out infinite;
+}
+
+.mode-status-pill.is-manual {
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #fde68a;
+}
+
+.mode-status-pill.is-manual .status-pulse {
+  background: var(--amber);
+  box-shadow: 0 0 10px var(--amber);
+}
+
+.idle-countdown {
+  padding-left: 8px;
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fcd34d;
+}
+
+@keyframes pulseBeacon {
+  0%, 100% { opacity: 0.45; transform: scale(0.88); }
+  50% { opacity: 1; transform: scale(1.18); }
+}
+
+/* ==========================================================================
+   3. TOP-RIGHT BOOTH CONTROLS
+   ========================================================================== */
+.expo-top-right {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 22;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.expo-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--glass-dark);
+  backdrop-filter: blur(14px);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.expo-top-btn:hover {
+  border-color: var(--border-bright);
+  color: var(--ink-white);
+  background: rgba(15, 23, 42, 0.90);
+}
+
+.expo-top-btn kbd {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--ink-dim);
+}
+
+.scenario-switcher {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--glass-dark);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-subtle);
+}
+
+.sw-link {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: var(--ink-dim);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.sw-link:hover {
+  color: var(--ink-white);
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.btn-restore-hud {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 30;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(9, 14, 24, 0.55);
+  color: rgba(248, 250, 252, 0.72);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.btn-restore-hud:hover {
+  opacity: 1;
+  background: var(--glass-dark-strong);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   4. RIGHT-EDGE GIANT GLANCEABLE KPI COLUMN
+   ========================================================================== */
+.expo-kpi-column {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-54%);
+  z-index: 16;
+  width: 212px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.kpi-tile {
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: rgba(8, 13, 22, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-right: 3px solid rgba(148, 163, 184, 0.36);
+  text-align: right;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.34);
+}
+
+.kpi-tile.is-live {
+  border-right-color: var(--cyan);
+}
+
+.kt-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+  margin-bottom: 4px;
+}
+
+.kt-val {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink-white);
+  font-variant-numeric: tabular-nums;
+}
+
+.kt-val.cyan {
+  color: var(--cyan-bright);
+  text-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+}
+
+.kt-val small {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-dim);
+  margin-left: 2px;
+}
+
+.kpi-badge-green {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(6, 22, 24, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(52, 211, 153, 0.48);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.36);
+  font-size: 12px;
+  font-weight: 700;
+  color: #6ee7b7;
+}
+
+.green-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 8px var(--emerald);
+}
+
+/* ==========================================================================
+   5. LOWER-LEFT CINEMATIC BROADCAST LOWER-THIRD
+   ========================================================================== */
+.expo-lower-third {
+  position: absolute;
+  left: 28px;
+  bottom: 112px;
+  z-index: 16;
+  max-width: 540px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(9, 14, 24, 0.80), rgba(9, 14, 24, 0.56));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-left: 4px solid var(--cyan);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, bottom 0.3s ease;
+}
+
+.expo-lower-third.switching {
+  opacity: 0.22;
+  transform: translateY(6px);
+}
+
+.lt-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.lt-act-num {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.42);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--cyan-bright);
+}
+
+.lt-act-tag {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+}
+
+.lt-headline {
+  margin: 0 0 6px;
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ink-white);
+}
+
+.lt-subline {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ==========================================================================
+   6. BOTTOM-CENTER GIANT TOUCH PRESENTER DOCK
+   ========================================================================== */
+.expo-dock {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 25;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 20px;
+  background: var(--glass-dark-strong);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  max-width: calc(100vw - 40px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dock-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dock-sep {
+  width: 1px;
+  height: 30px;
+  background: rgba(148, 163, 184, 0.22);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+.act-btn,
+.toggle-btn,
+.speed-cycle-btn,
+.play-btn,
+.icon-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 46px;
+  border-radius: 13px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+}
+
+.act-btn {
+  padding: 0 14px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink-soft);
+}
+
+.act-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--ink-white);
+}
+
+.act-btn.active {
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  color: #ffffff;
+  border-color: rgba(125, 211, 252, 0.65);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.40);
+}
+
+.key-cap {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.10);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.act-btn.active .key-cap {
+  background: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+.toggle-btn {
+  padding: 0 13px;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(148, 163, 184, 0.16);
+  color: var(--ink-soft);
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.11);
+  color: var(--ink-white);
+}
+
+.toggle-btn.active {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: var(--cyan);
+  color: var(--cyan-bright);
+}
+
+.speed-cycle-btn {
+  padding: 0 13px;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(52, 211, 153, 0.34);
+  color: #6ee7b7;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.speed-cycle-btn:hover {
+  background: rgba(16, 185, 129, 0.22);
+}
+
+.play-btn {
+  padding: 0 16px;
+  background: rgba(245, 158, 11, 0.16);
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #fde68a;
+}
+
+.play-btn.is-playing {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.42);
+  color: var(--cyan-bright);
+}
+
+.icon-reset-btn {
+  width: 46px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(148, 163, 184, 0.16);
+  color: var(--ink-soft);
+  font-size: 18px;
+}
+
+.icon-reset-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--ink-white);
+}
+
+/* ==========================================================================
+   7. BOTTOM SHOWREEL PROGRESS BAR
+   ========================================================================== */
+.expo-progress-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  z-index: 30;
+  background: rgba(148, 163, 184, 0.16);
+}
+
+.expo-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0284c7, #38bdf8, #67e8f9);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.85);
+}
+
+.progress-ticks span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(6, 10, 18, 0.85);
+}
+
+/* ==========================================================================
+   8. CLEAN LED WALL BROADCAST MODE (Press H)
+   ========================================================================== */
+body.clean-wall .expo-top-right,
+body.clean-wall .expo-dock {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(20px);
+}
+
+body.clean-wall .expo-top-right {
+  transform: translateY(-16px);
+}
+
+body.clean-wall .expo-lower-third {
+  bottom: 34px;
+}
+
+/* ==========================================================================
+   9. RESPONSIVE ADAPTATIONS (1280px Laptops & 1080p/4K LED Walls)
+   ========================================================================== */
+@media (max-width: 1280px) {
+  .expo-kpi-column {
+    width: 182px;
+  }
+  .kt-val {
+    font-size: 22px;
+  }
+  .act-btn {
+    padding: 0 10px;
+    font-size: 13px;
+  }
+  .toggle-btn,
+  .speed-cycle-btn,
+  .play-btn {
+    padding: 0 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1060px) {
+  .expo-kpi-column {
+    display: none;
+  }
+  .key-cap {
+    display: none;
+  }
+  .expo-lower-third {
+    max-width: 440px;
+    bottom: 98px;
+  }
+}

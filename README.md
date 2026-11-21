@@ -24,6 +24,7 @@
   - `renders/04_rear_34.png` — 背面 3/4 视角（后置传动箱、电控柜与上料平台）
 - **本地离线 WebGL 引擎与交互页**：
   - `index.html` + `website.css` + `js/website-scene.js` — **默认首页 · 场景一：官方产品展示页**（无滚轮劫持 5 章节滚动叙事 Scrollytelling、浅色影棚无缝融底、按需开启 360° 自由探索与 5 处空间热点）
+  - `expo.html` + `expo.css` + `js/expo-scene.js` — **场景二：展会大屏互动演示**（4K LED 暗场展台光环、45 秒五幕无人值守循环巡演、大按钮多点触控与无线翻页笔热键 `1-5/C/X/E/F/H`、25 秒无操作自动恢复巡演）
   - `engineer.html` + `styles.css` + `js/app-scene.js` — **工程师全参数剖切检视版**（13 组部件目录树、爆炸拆解、X-Ray 透视、13 秒视频同款演示）
   - `vendor/` — 本地离线 Three.js r147 + GLTFLoader + DRACOLoader + WASM 解码器
 
