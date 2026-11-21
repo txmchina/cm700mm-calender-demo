@@ -133,7 +133,7 @@
   // 2. BOOTSTRAP FROM SINGLE SOURCE OF TRUTH (specs/machine_config.json)
   // ===========================================================================
   function bootstrapExpo() {
-    fetch('specs/machine_config.json')
+    fetch('specs/machine_config.json', { cache: 'no-cache' })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
